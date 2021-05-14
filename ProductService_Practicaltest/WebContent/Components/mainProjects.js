@@ -83,10 +83,15 @@ if ($("#Proj_link").val().trim() == "")
  {
  return "Insert Project link.";
  }
+
 //Proj_Desc
-if ($("#Proj_Desc").val().trim() == "")
-{
+var Proj_Desc=$("#Proj_Desc").val();
+if (Proj_Desc == " ")
+ {
 return "Insert Project Description.";
+ }
+else if(!(/^\w+$/i.test(Proj_Desc))){
+	return 'Invalid Description';
 }
 //PRICE-------------------------------
 if ($("#Price").val().trim() == "")
@@ -94,19 +99,22 @@ if ($("#Price").val().trim() == "")
  return "Insert Price.";
  }
 // is numerical value
-var tmpPrice = $("#Price").val().trim();
-if (!$.isNumeric(tmpPrice))
+var Price = $("#Price").val().trim();
+if (!$.isNumeric(Price))
  {
  return "Insert a numerical value for Price.";
  }
+else if (Price.length < 4)
+{
+ return "Price should gerater than 1000.";
+}
 // convert to decimal price
- $("#Price").val(parseFloat(tmpPrice).toFixed(2));
-// DESCRIPTION------------------------
+ $("#Price").val(parseFloat(Price).toFixed(2));
+// Submit date------------------------
 if ($("#Submit_date").val().trim() == "")
  {
  return "Insert Submit Date.";
  }
-
 return true;
 }
 

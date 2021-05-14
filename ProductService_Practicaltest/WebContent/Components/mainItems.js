@@ -66,15 +66,24 @@ $(document).on("click", ".btnRemove", function(event)
 function validateItemForm()
 {
 // Name
-if ($("#Item_Name").val().trim() == "")
+	var Item_Name=$("#Item_Name").val();
+if (Item_Name== "")
  {
  return "Insert Item Name.";
  }
+else if(!(/^\w+$/i.test(Item_Name))){
+	return 'Invalid name';
+}
 // Desc
-if ($("#Item_Desc").val().trim() == "")
+
+var Item_Desc=$("#Item_Desc").val();
+if (Item_Desc == " ")
  {
  return "Insert Item Description.";
  }
+else if(!(/^\w+$/i.test(Item_Desc))){
+	return 'Invalid Description';
+}
 
 //PRICE-------------------------------
 if ($("#Item_price").val().trim() == "")
@@ -82,18 +91,28 @@ if ($("#Item_price").val().trim() == "")
  return "Insert Item Price.";
  }
 // is numerical value
-var tmpPrice = $("#Item_price").val().trim();
-if (!$.isNumeric(tmpPrice))
+var Item_price = $("#Item_price").val().trim();
+if (!$.isNumeric(Item_price))
  {
  return "Insert a numerical value for Item Price.";
  }
+else if (Item_price.length < 3)
+	{
+	 return "Item Price should gerater than 100.";
+	}
 // convert to decimal price
- $("#Item_price").val(parseFloat(tmpPrice).toFixed(2));
+ $("#Item_price").val(parseFloat(Item_price).toFixed(2));
+ 
 // Stock_qty------------------------
-if ($("#Stock_qty").val().trim() == "")
+ 
+ var Stock_qty = $("#Stock_qty").val();
+if (Stock_qty.trim() == "")
  {
- return "Insert Item Stock_Qty.";
+ return 'Insert Item Stock_Qty.';
  }
+else if(Stock_qty < 0){
+	return 'Can not Stock_Qty less than zero';
+}
 return true;
 }
 
